@@ -36,7 +36,7 @@ def output(output):
     tour = re.findall('TOUR_SECTION([\d\n]*)', raw)[0]
     return sp.array([int(i) for i in re.findall('\d+', tour)])
 
-def tour(distances, verbose=False):
+def cycle(distances, verbose=False):
     pd.testing.assert_index_equal(distances.index, distances.columns)
     try:
         files = {n: NamedTemporaryFile('w', delete=False) for n in ['params', 'problem', 'output']}
@@ -64,12 +64,12 @@ def tour(distances, verbose=False):
         for f in files.values():
             Path(f.name).unlink()
         
-def cycle(distances, **kwargs):
+def tour(distances, **kwargs):
     augmented = distances.copy()
     augmented = augmented.append(pd.Series(0, augmented.columns, name='dummy'))
     augmented = augmented.T.append(pd.Series(0, augmented.index, name='dummy')).T
     
-    t = tour(augmented, **kwargs)
+    t = cycle(augmented, **kwargs)
     
     dummy = sp.nonzero(t == 'dummy')[0][0]   
     c = sp.concatenate([t[dummy+1:], t[:dummy]])
@@ -85,5 +85,5 @@ def seriate(corr):
     Returns:
         A seriated correlation matrix"""
     
-    order = cycle(1 - corr)
+    order = tour(1 - corr)
     return corr.loc[order].loc[:, order]
