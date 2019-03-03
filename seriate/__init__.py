@@ -33,8 +33,8 @@ def params(problem, output, **kwargs):
     
 def output(output):
     raw = Path(output.name).read_text()
-    tour = re.findall('TOUR_SECTION([\d\n]*)', raw)[0]
-    return sp.array([int(i) for i in re.findall('\d+', tour)])
+    tour = re.findall(r'TOUR_SECTION([\d\n]*)', raw)[0]
+    return sp.array([int(i) for i in re.findall(r'\d+', tour)])
 
 def cycle(distances, verbose=False):
     pd.testing.assert_index_equal(distances.index, distances.columns)
