@@ -1,4 +1,4 @@
-import scipy as sp
+import numpy as np
 import re
 from tempfile import NamedTemporaryFile
 from subprocess import Popen, STDOUT, PIPE
@@ -34,7 +34,7 @@ def params(problem, output, **kwargs):
 def output(output):
     raw = Path(output.name).read_text()
     tour = re.findall(r'TOUR_SECTION([\d\n]*)', raw)[0]
-    return sp.array([int(i) for i in re.findall(r'\d+', tour)])
+    return np.array([int(i) for i in re.findall(r'\d+', tour)])
 
 def cycle(distances, verbose=False):
     pd.testing.assert_index_equal(distances.index, distances.columns)
@@ -71,13 +71,13 @@ def tour(distances, **kwargs):
     
     t = cycle(augmented, **kwargs)
     
-    dummy = sp.nonzero(t == 'dummy')[0][0]   
-    c = sp.concatenate([t[dummy+1:], t[:dummy]])
+    dummy = np.nonzero(t == 'dummy')[0][0]   
+    c = np.concatenate([t[dummy+1:], t[:dummy]])
     
     return pd.Index(c)
 
 def seriate(corr):
-    """Seriates a correlation matrix.
+    """Seriates a Pandas correlation matrix.
     
     Args:
         corr: a square dataframe of pairwise correlations
