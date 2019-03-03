@@ -4,7 +4,7 @@
 
 ### Licensing
 
-This module is GPL licensed. This is more restrictive than I'd usually like, but it's unavoidable because the underlying LKH solver - which is installed automatically with this package - is vaguely described as 'for academic and non-commercial use'. If anyone decides to replace it with a fully open-source solver, please submit a PR and I'd be happy to relax the license back to MIT.
+This module does not have a license currently as the underlying LKH solver - which is installed automatically with this package - is vaguely described as **'for academic and non-commercial use'** , and I'm not sure how that restricts the choice of license for this wrapper.
 
 ### Internals
 
