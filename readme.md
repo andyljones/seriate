@@ -1,6 +1,6 @@
 *Seriating* a correlation matrix means re-ordering its rows and columns so that similar items end up close together. Kind of like clustering, but better. [Here is an excellent demonstration of its use](http://nicolas.kruchten.com/content/2018/02/seriation/). You can install this package with
 
-```pip install seriate```
+```pip install git+https://github.com/andyljones/seriate.git```
 
 ### Licensing
 
